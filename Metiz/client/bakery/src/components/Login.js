@@ -63,7 +63,7 @@ function Login() {
                     sx={{ marginBottom: '20px' }}
                 >
                     <MenuItem value="user">Покупатель</MenuItem>
-                    <MenuItem value="metiz">Метиз</MenuItem>
+                    <MenuItem value="metiz">Магазин метизов</MenuItem>
                 </Select>
                 <TextField
                     label="Email"
