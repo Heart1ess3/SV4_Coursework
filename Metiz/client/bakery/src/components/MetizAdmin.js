@@ -82,7 +82,7 @@ function MetizAdmin() {
     return (
         <Container sx={{ padding: '20px' }}>
             <Typography variant="h4" component="h1" gutterBottom>
-                Панель управления метиза
+                Панель управления магазина
             </Typography>
             <Box sx={{ marginBottom: '20px' }}>
                 <Typography variant="h6" component="div">
@@ -98,7 +98,7 @@ function MetizAdmin() {
             <List>
                 <ListItem>
                     <Button component={Link} to="/metiz-admin/edit" variant="outlined" color="primary" fullWidth>
-                        Редактировать информацию о метизе
+                        Редактировать информацию
                     </Button>
                 </ListItem>
                 <ListItem>

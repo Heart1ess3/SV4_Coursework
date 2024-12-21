@@ -119,30 +119,40 @@ function Profile() {
     }
 
     return (
-        <Box sx={{ maxWidth: 600, mx: 'auto', p: 3 }}>
+        <Box sx={{ maxWidth: 600, mx: 'auto', textAlign: "center" , p: 3 }}>
             <Typography variant="h4" gutterBottom>
                 Профиль пользователя
             </Typography>
             <ToastContainer />
             <Box component="form" onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sx={{ textAlign: 'center' }}>
-                        <Avatar
-                            src={formData.photo ? URL.createObjectURL(formData.photo) : `http://localhost:5000${user.photo}`}
-                            alt="Фото профиля"
-                            sx={{ width: 400, height: 400, mx: 'auto' }}
-                        />
-                        <IconButton color="primary" component="label">
-                            <PhotoCamera />
-                            <input
-                                type="file"
-                                name="photo"
-                                accept="image/*"
-                                hidden
-                                onChange={handleChange}
-                            />
-                        </IconButton>
-                    </Grid>
+                <Grid item xs={12} sx={{ textAlign: 'center' }}>
+    <Avatar
+        src={
+            formData.photo
+                ? URL.createObjectURL(formData.photo)
+                : `http://localhost:5000${user.photo}`
+        }
+        alt="Фото профиля"
+        sx={{
+            width: { xs: 150, sm: 200, md: 300, lg: 400 },
+            height: { xs: 150, sm: 200, md: 300, lg: 400 },
+            mx: 'auto',
+            borderRadius: '50%',
+            objectFit: 'cover',
+        }}
+    />
+    <IconButton color="primary" component="label" sx={{ mt: 2 }}>
+        <PhotoCamera />
+        <input
+            type="file"
+            name="photo"
+            accept="image/*"
+            hidden
+            onChange={handleChange}
+        />
+    </IconButton>
+</Grid>
                     <Grid item xs={12}>
                         <TextField
                             label="Имя*"
