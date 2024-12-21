@@ -124,13 +124,20 @@ function MetizDetails() {
                     </Box>
 
                     {metiz.photo && (
-                        <CardMedia
-                            component="img"
-                            image={`http://localhost:5000${metiz.photo}`}
-                            alt={metiz.name}
-                            sx={{ width: '300px', height: 'auto', marginBottom: '20px' }}
-                        />
-                    )}
+    <CardMedia
+        component="img"
+        image={`http://localhost:5000${metiz.photo}`}
+        alt={metiz.name}
+        sx={{
+            width: '100%',
+            maxWidth: '400px', // Ограничение максимальной ширины
+            aspectRatio: '1 / 1', // Соотношение сторон 1:1
+            objectFit: 'contain', // Вписываем изображение без обрезки
+            borderRadius: '4px', // Небольшое скругление углов
+            marginBottom: '20px',
+        }}
+    />
+)}
                     <Typography variant="body1" paragraph>
                         {metiz.description}
                     </Typography>
@@ -174,59 +181,62 @@ function MetizDetails() {
                         </Box>
                     )}
 
-                    {metiz.Products && metiz.Products.length > 0 ? (
-                        <Grid container spacing={4}>
-                            {metiz.Products.map((product) => (
-                                <Grid item xs={12} sm={6} md={4} key={product.id}>
-                                    <Card>
-                                        {product.photo && (
-                                            <CardMedia
-                                                component="img"
-                                                height="200"
-                                                image={`http://localhost:5000${product.photo}`}
-                                                alt={product.name}
-                                            />
-                                        )}
-                                        <CardContent>
-                                            <Typography variant="h5" component="h3">
-                                                {product.name}
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary" paragraph>
-                                                {product.description}
-                                            </Typography>
-                                            <Typography variant="body1" color="text.primary" paragraph>
-                                                Цена: {product.price} ₽
-                                            </Typography>
-                                            {authData.isAuthenticated && (
-                                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                                    <TextField
-                                                        label="Количество"
-                                                        type="number"
-                                                        inputProps={{ min: 1 }}
-                                                        value={quantities[product.id] || 1}
-                                                        onChange={(e) =>
-                                                            handleQuantityChange(product.id, e.target.value)
-                                                        }
-                                                        sx={{ width: '80px', marginRight: '10px' }}
-                                                    />
-                                                    <Button
-                                                        variant="contained"
-                                                        color="primary"
-                                                        onClick={() => handleAddToCart(product)}
-                                                        disabled={isDifferentMetiz}
-                                                    >
-                                                        Добавить в корзину
-                                                    </Button>
-                                                </Box>
-                                            )}
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                            ))}
-                        </Grid>
-                    ) : (
-                        <Typography variant="body1">Товары не найдены.</Typography>
+{metiz.Products && metiz.Products.length > 0 ? (
+    <Grid container spacing={4}>
+        {metiz.Products.map((product) => (
+            <Grid item xs={12} sm={6} md={4} key={product.id}>
+                <Card>
+                    {product.photo && (
+                        <CardMedia
+                            component="img"
+                            image={`http://localhost:5000${product.photo}`}
+                            alt={product.name}
+                            sx={{
+                                width: '100%',
+                                aspectRatio: '1 / 1', // Соотношение сторон 1:1
+                                objectFit: 'contain', // Изображение вписывается без обрезки
+                                borderRadius: '4px', // Небольшое скругление углов
+                            }}
+                        />
                     )}
+                    <CardContent>
+                        <Typography variant="h5" component="h3">
+                            {product.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" paragraph>
+                            {product.description}
+                        </Typography>
+                        <Typography variant="body1" color="text.primary" paragraph>
+                            Цена: {product.price} ₽
+                        </Typography>
+                        {authData.isAuthenticated && (
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                <TextField
+                                    label="Количество"
+                                    type="number"
+                                    inputProps={{ min: 1 }}
+                                    value={quantities[product.id] || 1}
+                                    onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                                    sx={{ width: '80px', marginRight: '10px' }}
+                                />
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => handleAddToCart(product)}
+                                    disabled={isDifferentMetiz}
+                                >
+                                    Добавить в корзину
+                                </Button>
+                            </Box>
+                        )}
+                    </CardContent>
+                </Card>
+            </Grid>
+        ))}
+    </Grid>
+) : (
+    <Typography variant="body1">Товары не найдены.</Typography>
+)}
 
                     <Typography
                         variant="h4"
